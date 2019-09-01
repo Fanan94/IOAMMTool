@@ -1,15 +1,5 @@
 <template>
   <div id="addUser">
-    <!-- settings changer -->
-    <div class="skins-nav">
-      <a href="#" class="skin first_nav selected">
-        <span class="icon"></span><span class="text">Default</span>
-      </a>
-      <a href="#" class="skin second_nav" data-file="css/skins/dark.css">
-        <span class="icon"></span><span class="text">Dark skin</span>
-      </a>
-    </div>
-
 
     <div class="container-fluid">
       <div id="pad-wrapper" class="new-user">
@@ -24,29 +14,29 @@
               <form class="new_user_form inline-input"/>
               <div v-for="(device,index) in devices" :key="index">
 
-                <div class="span12 field-box">
-                <label></label>
-                <input class="span9" type="hidden" name="edit-id" :value="device.id"/>
-                </div>
+                  <div class="span12 field-box">
+                    <label></label>
+                    <input class="span9" type="hidden" name="edit-id" :value="device.id"/>
+                  </div>
 
-                <div class="span12 field-box">
-                <label>设备名:</label>
-                <input class="span9" type="text" name="edit-name" :value="device.name"/>
-                </div>
-                
-                <div class="span12 field-box">
-                  <label>IP:</label>
-                  <input class="span9" type="text" name="edit-ip" :value="device.ip"/>
-                </div>
-                
-                <div class="span12 field-box">
-                  <label>描述:</label>
-                  <input class="span9" type="text" name="edit-des" :value="device.description"/>
-                </div>
-                
-                <div class="span7 field-box actions">
-                <input type="button" class="btn-glow primary" value="保存" style="width: 100px;" @click="editDevice"/>
-                </div>  
+                  <div class="span12 field-box">
+                    <label>设备名:</label>
+                    <input class="span9" type="text" name="edit-name" :value="device.name"/>
+                  </div>
+                  
+                  <div class="span12 field-box">
+                    <label>IP:</label>
+                    <input class="span9" type="text" name="edit-ip" :value="device.ip"/>
+                  </div>
+                  
+                  <div class="span12 field-box">
+                    <label>描述:</label>
+                    <input class="span9" type="text" name="edit-des" :value="device.description"/>
+                  </div>
+                  
+                  <div class="span7 field-box actions">
+                    <input type="button" class="btn-glow primary" value="保存" style="width: 100px;" @click="editDevice"/>
+                  </div>  
               </div>  
 
               </form>
@@ -95,7 +85,7 @@ export default{
         methods: {
 
           modifyDevice: function (event){
-                alert("A");
+                //alert("A");
                 var e = event || window.event;
                 //alert("B");
                 var target = e.target || e.srcElement;
@@ -104,7 +94,7 @@ export default{
                     var rowIndex = target.parentNode.parentNode.parentNode.parentNode.parentNode.rowIndex;
                     //alert(rowIndex);
                     var id = document.getElementById("table_value").rows[rowIndex].cells[0].innerHTML;
-                    alert(id);
+                    //alert(id);
                     var qs = require('qs');
                     this.$axios.get('devices/'+id,
                       {
@@ -129,7 +119,7 @@ export default{
 
             editDevice: function (){
                 var id = $("input[name='edit-id']").val();
-                alert(id);
+                //alert(id);
                 var qs = require('qs');
                 this.$axios.patch('devices/'+id ,qs.stringify({
                     "id": $("input[name='edit-id']").val(),

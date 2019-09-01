@@ -4,7 +4,7 @@
         <div class="container-fluid">
             <div id="pad-wrapper" class="users-list">
                 <div class="row-fluid header">
-                    <h3>用户</h3>
+                    <h3>部署设计</h3>
                     <div class="span10 pull-right">
                         <input type="text" class="span5 search" placeholder="Type a user's name..." />
 
@@ -45,7 +45,7 @@
                             </div>
                         </div>
 
-                        <router-link to="/addUser" class="btn-flat success pull-right">
+                        <router-link to="/addDeployPlan" class="btn-flat success pull-right">
                             <span>&#43;</span>
                             新增
                         </router-link>
@@ -58,37 +58,57 @@
 
                 <!-- Users table -->
                 <div class="row-fluid table">
-                    <table class="table table-hover">
+                    <table class="table table-hover" id="table_value">
                         <thead>
-                            <tr>
-                                <th class="span4 sortable">
-                                    用户名
-                                </th>
-                                <th class="span3 sortable">
-                                    <span class="line"></span>密码
-                                </th>
-                                <th class="span3">
-                                    <span class="line"></span>操作
-                                </th>
-                            </tr>
+                        <tr>
+                            <th class="span4 sortable">
+                               名称
+                            </th> 
+                            <th class="span3">
+                                <span class="line"></span>描述
+                            </th>
+                            <th class="span3">
+                                <span class="line"></span>绑定详情
+                            </th>
+                            <th class="span3">
+                                <span class="line"></span>操作
+                            </th>
+                        </tr>
                         </thead>
                         <tbody>
                         <!-- row -->
-                        <tr class="first" v-for="(user,index) in users" :key="index">
-                                    <td>
-                                        {{user.username}}
-                                    </td>
-                                    <td class="description">
-                                        {{user.password}}
-                                    </td>
-                                    <td>
-                                        <span class="label label-success">Active</span>
-                                        <ul class="actions">
-                                            <li><a href="#">修改</a></li>
-                                            <li class="last"><a href="#">删除</a></li>
-                                        </ul>
-                                    </td>
-                                </tr>
+                        <tr class="first" v-for="(deployplan,index) in deployplans" :key="index">
+                            <td style="display:none">{{deployplan.id}}</td>
+                            <td>
+                                {{deployplan.name}}
+                            </td>
+                            <td class="description">
+                                {{deployplan.description}}
+                            </td>
+                            <td>
+                                <ul class="ulactions">
+                                    <li>
+                                        <router-link :to='{name:"deployplanDetail",params:{id:deployplan.id}}'>
+                                            <input type="button" class="btn-flat primary" value="查看"/>
+                                        </router-link>
+                                    </li>
+                                </ul>
+                            </td>
+                            <td>
+                                <ul class="ulactions">
+                                    <li>
+                                        <router-link to="#">
+                                         <input type="button" class="btn-flat primary" value="修改"/>
+                                        </router-link>
+                                    </li>
+                                    <li class="last">
+                                        <!-- <router-link to="/devices" @click="deleteDevice">删除</router-link>  -->
+                                        <input type="button" class="btn-flat primary" value="删除"/>
+                                    </li>
+                                </ul>
+                            </td>
+
+                        </tr>
                         <!-- row -->
 
                         </tbody>
@@ -108,43 +128,56 @@
                 <!-- end users table -->
             </div>
         </div>
-        <hr/>
-        <!-- <div>
-            {{users}}
+        <!-- <hr/>
+        <div>
+            {{deployplans}}
         </div> -->
     </div>
 </template>
 
 <script>
-    export default{
-        /* eslint-disable */
-        data(){
-            return{
-                users:[]
-            }
-        },created(){
-            this.$axios.get('users/admin',{
-                /*params:{  //get请求在第二个位置，post在第三个位置
-                    ID:'c02da6e9-a334-4e41-b842-c59eb7d0d3f3'
-                },*/
-                //设置头
-                headers:{
-                    'content-type':'application/x-www-form-urlencoded'
-                },
-                auth: {
-                    username: 'admin',
-                    password: 'admin'
-                }
-            }).then(res=>{
-                this.users = res.data.data
-            })
-            .catch(err=>{
-                console.log(err);
-            })
+/* eslint-disable */
+/*let projectId = "5a922835-a587-4dad-b3b7-bb5005ef4c99";*/
+/*let projectId = "2ec24245-0f8d-4db5-9d9b-1726ed727057";*/
 
+export default{
+    
+    data(){
+        return{
+            deployplans:[]
         }
+    },
+    created(){
+        var projectId = this.getCookie('projectId');
+        var username = this.getCookie('username');
+        var password = this.getCookie('password');
+        
+        this.$axios.get('project/'+projectId+'/deployplan',{
+            //设置头
+            headers:{
+                'content-type':'application/x-www-form-urlencoded'
+            },
+            auth: {
+                username: username,
+                password: password
+            }
+        }).then(res=>{
+            this.deployplans = res.data.data;
+            console.log(this.deployplans);
+        })
+        .catch(err=>{
+            console.log(err);
+        })
+
     }
+}
 </script>
 <style>
+.ulactions{
+    margin: 5px 0 0 0;
+}
 
+.ulactions li{
+    display: inline;
+}
 </style>

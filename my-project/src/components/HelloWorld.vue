@@ -9,7 +9,19 @@
           <span class="icon-bar"></span>
         </button>
 
-        <a class="brand" href="index.html"><img src="img/logo.png" /></a>
+        <a class="brand" href="index.html">
+          <!-- <img src="img/logo.png" /> -->
+          <div style="float:left;width:30px;">
+            <!-- <img src="img/ico-mail.png" /> -->
+            <i class="icon-leaf" style="color:blue;"></i>
+          </div>
+          
+          <div style="float:right;">
+            
+            <h4 style="color:white;font-weight:700;">一体化运维管理平台</h4>            
+          </div>
+
+        </a>
 
         <ul class="nav pull-right">
           <li class="hidden-phone">
@@ -69,7 +81,7 @@
                 <a href="#" class="close-icon"><i class="icon-remove-sign"></i></a>
                 <div class="messages">
                   <a href="#" class="item">
-                    <img src="img/contact-img.png" class="display" />
+                    <img src="static/img/contact-img.png" class="display" />
                     <div class="name">Alejandra Galván</div>
                     <div class="msg">
                       There are many variations of available, but the majority have suffered alterations.
@@ -77,7 +89,7 @@
                     <span class="time"><i class="icon-time"></i> 13 min.</span>
                   </a>
                   <a href="#" class="item">
-                    <img src="img/contact-img2.png" class="display" />
+                    <img src="static/img/contact-img2.png" class="display" />
                     <div class="name">Alejandra Galván</div>
                     <div class="msg">
                       There are many variations of available, have suffered alterations.
@@ -85,7 +97,7 @@
                     <span class="time"><i class="icon-time"></i> 26 min.</span>
                   </a>
                   <a href="#" class="item last">
-                    <img src="img/contact-img.png" class="display" />
+                    <img src="static/img/contact-img.png" class="display" />
                     <div class="name">Alejandra Galván</div>
                     <div class="msg">
                       There are many variations of available, but the majority have suffered alterations.
@@ -114,7 +126,7 @@
           </li>
           <li class="settings hidden-phone">
             <a href="personal-info.html" role="button">
-              <i class="icon-cog"></i>
+              <i class="icon-cog"></i>e
             </a>
           </li>
           <li class="settings hidden-phone">
@@ -134,8 +146,8 @@
             <div class="arrow_border"></div>
           </div>
           <router-link to="/users">
-            <i class="icon-home"></i>
-            <span>users</span>
+            <i class="icon-group"></i>
+            <span>用户管理</span>
           </router-link>
           <!-- <a id="index.html">
             <i class="icon-home"></i>
@@ -144,8 +156,8 @@
         </li>
         <li>
           <router-link to="/components">
-            <i class="icon-signal"></i>
-            <span>componets</span>
+            <i class="icon-cogs"></i>
+            <span>组件管理</span>
           </router-link>
           <!-- <a href="chart-showcase.html">
             <i class="icon-signal"></i>
@@ -154,105 +166,59 @@
         </li>
         <li>
           <router-link to="/devices">
+            <i class="icon-laptop"></i>
+            <span>设备管理</span>
+          </router-link>
+        </li>
+
+        <!-- <li>
+          <router-link to="/uploadtest">
             <i class="icon-signal"></i>
-            <span>devices</span>
+            <span>uploadtest</span>
+          </router-link>
+        </li> -->
+
+        <li>
+          <router-link to="/deployplan">
+            <i class="icon-magnet"></i>
+            <span>部署管理</span>
           </router-link>
         </li>
 
         <li>
-          <router-link to="/treeMenu">
-            <i class="icon-signal"></i>
-            <span>fx</span>
+          <router-link to="/deploybind">
+            <i class="icon-sitemap"></i>
+            <span>部署设计</span>
           </router-link>
         </li>
 
-        <li>
-          <router-link to="/deploy">
-            <i class="icon-move"></i>
-            <span>xy</span>
-          </router-link>
-        </li>
-
-        <li>
+        <!-- <li>
           <router-link to="/ztree">
             <i class="icon-move"></i>
             <span>ztree</span>
           </router-link>
         </li>
-
-
-
+        
         <li>
-          <a class="dropdown-toggle" href="#">
-            <i class="icon-group"></i>
-            <span>Users</span>
-            <i class="icon-chevron-down"></i>
-          </a>
-          <ul class="submenu">
-            <li><a href="user-list.html">User list</a></li>
-            <li><a href="new-user.html">New user form</a></li>
-            <li><a href="user-profile.html">User profile</a></li>
-          </ul>
+          <router-link to="/signin">
+            <i class="icon-move"></i>
+            <span>sign</span>
+          </router-link>
+        </li> -->
+        <li>
+          <router-link to="/scan">
+            <i class="icon-headphones"></i>
+            <span>部署状态</span>
+          </router-link>
         </li>
+
         <li>
-          <a class="dropdown-toggle" href="#">
+          <router-link to="/log">
             <i class="icon-edit"></i>
-            <span>Forms</span>
-            <i class="icon-chevron-down"></i>
-          </a>
-          <ul class="submenu">
-            <li><a href="form-showcase.html">Form showcase</a></li>
-            <li><a href="form-wizard.html">Form wizard</a></li>
-          </ul>
+            <span>日志</span>
+          </router-link>
         </li>
-        <li>
-          <a href="gallery.html">
-            <i class="icon-picture"></i>
-            <span>Gallery</span>
-          </a>
-        </li>
-        <li>
-          <a href="calendar.html">
-            <i class="icon-calendar-empty"></i>
-            <span>Calendar</span>
-          </a>
-        </li>
-        <li>
-          <a href="tables.html">
-            <i class="icon-th-large"></i>
-            <span>Tables</span>
-          </a>
-        </li>
-        <li>
-          <a class="dropdown-toggle ui-elements" href="#">
-            <i class="icon-code-fork"></i>
-            <span>UI Elements</span>
-            <i class="icon-chevron-down"></i>
-          </a>
-          <ul class="submenu">
-            <li><a href="ui-elements.html">UI Elements</a></li>
-            <li><a href="icons.html">Icons</a></li>
-          </ul>
-        </li>
-        <li>
-          <a href="personal-info.html">
-            <i class="icon-cog"></i>
-            <span>My Info</span>
-          </a>
-        </li>
-        <li>
-          <a class="dropdown-toggle" href="#">
-            <i class="icon-share-alt"></i>
-            <span>Extras</span>
-            <i class="icon-chevron-down"></i>
-          </a>
-          <ul class="submenu">
-            <li><a href="code-editor.html">Code editor</a></li>
-            <li><a href="grids.html">Grids</a></li>
-            <li><a href="signin.html">Sign in</a></li>
-            <li><a href="signup.html">Sign up</a></li>
-          </ul>
-        </li>
+
       </ul>
     </div>
 
@@ -267,13 +233,20 @@
 </template>
 
 <script>
-  export default {
-    name: 'HelloWorld',
-    data () {
-      return {
-      }
+/* eslint-disable */
+
+export default {
+  data () {
+    return {
     }
+  },
+  created(){
+      /*var projectId = this.$route.params.id;
+     // alert(projectId);
+      console.log(projectId);*/
   }
+          
+}
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->

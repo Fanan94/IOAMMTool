@@ -1,31 +1,60 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import HelloWorld from '@/components/HelloWorld'
+import main from '@/components/HelloWorld'
 import users from '@/pages/users'
 import components from '@/pages/components'
 import addComponent from '@/pages/addComponent'
 import addUser from '@/pages/addUser'
-import treeMenu from '@/pages/treeMenu'
+import uploadtest from '@/pages/uploadtest'
 import devices from '@/pages/devices'
 import addDevice from '@/pages/addDevice'
 import modifyDevice from '@/pages/modifyDevice'
 import modifyComponent from '@/pages/modifyComponent'
-import deploy from '@/pages/deploy'
+import deployplan from '@/pages/deployplan'
+import addDeployPlan from '@/pages/addDeployPlan'
+import deployplanDetail from '@/pages/deployplanDetail'
+import deploybind from '@/pages/deploybind'
 import ztree from '@/pages/ztree'
-import Axios from 'axios'
+import signin from '@/pages/signin'
+import selectProject from '@/pages/selectProject'
+import addProject from '@/pages/addProject'
+import scan from '@/pages/scan'
 
 /* eslint-disable */
-Axios.defaults.baseURL = 'http://192.168.0.116:8080/'  //路径提取出来，简化代码
+import Axios from 'axios'
+
+Axios.defaults.baseURL = 'http://192.168.0.104:8080/'  //路径提取出来，简化代码
+
+//Axios.defaults.baseURL = 'http://' + this.getCookie('ip') + '/'
 Vue.use(Router)
 Vue.prototype.$axios = Axios;
+
+
 
 export default new Router({
 
     routes: [
+
         {
             path: '/',
-            name: 'HelloWorld',
-            component: HelloWorld,
+            name: 'signin',
+            component: signin
+        },
+        {
+            path: '/selectProject',
+            name: 'selectProject',
+            component: selectProject
+        },
+        {
+            path: '/addProject',
+            name: 'addProject',
+            component: addProject
+        },
+
+        {
+            path: '/main',
+            name: 'main',
+            component: main,
             children: [
                 {
                     path: '/users',
@@ -49,9 +78,9 @@ export default new Router({
                 },
 
                 {
-                    path: '/treeMenu',
-                    name: 'treeMenu',
-                    component: treeMenu
+                    path: '/uploadtest',
+                    name: 'uploadtest',
+                    component: uploadtest
                 },
                 {
                     path: '/devices',
@@ -59,31 +88,52 @@ export default new Router({
                     component: devices
                 },
                 {
-                path: '/addDevice',
-                name: 'addDevice',
-                component: addDevice
-              },
-              {
-                path: '/modifyDevice',
-                name: 'modifyDevice',
-                component: modifyDevice
-              },
-              {
-                path: '/modifyComponent',
-                name: 'modifyComponent',
-                component: modifyComponent
-              },
-              {
-                path: '/deploy',
-                name: 'deploy',
-                component: deploy
-              },
-              {
-                path: '/ztree',
-                name: 'ztree',
-                component: ztree
-              }
+                    path: '/addDevice',
+                    name: 'addDevice',
+                    component: addDevice
+                },
+                {
+                    path: '/modifyDevice',
+                    name: 'modifyDevice',
+                    component: modifyDevice
+                },
+                {
+                    path: '/modifyComponent',
+                    name: 'modifyComponent',
+                    component: modifyComponent
+                },
+                {
+                    path: '/deployplan',
+                    name: 'deployplan',
+                    component: deployplan
+                },
+                {
+                    path: '/addDeployPlan',
+                    name: 'addDeployPlan',
+                    component: addDeployPlan
+                },
+                {
+                    path: '/deployplanDetail',
+                    name: 'deployplanDetail',
+                    component: deployplanDetail
+                },
+                {
+                    path: '/deploybind',
+                    name: 'deploybind',
+                    component: deploybind
+                },
+                {
+                    path: '/ztree',
+                    name: 'ztree',
+                    component: ztree
+                },
+                {
+                    path: '/scan',
+                    name: 'scan',
+                    component: scan
+                },
             ]
         }
+            
     ]
 })

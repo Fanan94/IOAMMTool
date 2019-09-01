@@ -6,7 +6,7 @@
                 <div class="row-fluid header">
                     <h3>设备</h3>
                     <div class="span10 pull-right">
-                        <input type="text" class="span5 search" placeholder="Type a device's name..." />
+                        <input class="search" type="text" placeholder="搜索设备.." v-model="searchQuery"/>
 
 
                         <div class="ui-dropdown">
@@ -50,14 +50,6 @@
                             新增
                         </router-link>
 
-                        <router-link to="/modifyDevice" class="btn-flat success pull-right">
-                            <span>&#43;</span>
-                            编辑
-                        </router-link>
-                        <!-- <router-link to="/xy1">
-                            <i class="icon-home"></i>
-                            <span>XY1</span>
-                        </router-link> -->
                     </div>
                 </div>
 
@@ -82,7 +74,7 @@
                         </thead>
                         <tbody>
                         <!-- row -->
-                        <tr class="first" v-for="(device,index) in devices" :key="index">
+                        <tr class="first" v-for="(device,index) in devicesA" :key="index">
                             <td style="display:none">{{device.id}}</td>
                             <td>
                                 {{device.name}}
@@ -94,16 +86,15 @@
                                 {{device.description}}
                             </td>
                             <td>
-                                <span class="label label-success">Active</span>
-                                <ul class="actions">
+                                <ul class="ulactions">
                                     <li>
                                         <router-link to="/modifyDevice">
-                                         <input type="button" class="btn-glow primary" value="修改" @click="modifyDevice($event)"/>
+                                         <input type="button" class="btn-flat primary" value="修改" @click="modifyDevice($event)"/>
                                         </router-link>
                                     </li>
                                     <li class="last">
                                         <!-- <router-link to="/devices" @click="deleteDevice">删除</router-link>  -->
-                                        <input type="button" class="btn-glow primary" value="删除" @click="deleteDevice($event)"/>
+                                        <input type="button" class="btn-flat primary" value="删除" @click="deleteDevice($event)"/>
                                     </li>
                                 </ul>
                             </td>
@@ -130,7 +121,7 @@
         </div>
         <hr/>
         <div>
-            {{devices}}
+            <!-- {{devices}} -->
         </div>
     </div>
 </template>
@@ -138,20 +129,27 @@
 <script>
 /* eslint-disable */
 import modifyDevice from '@/pages/modifyDevice'
+
+/*let projectId = "5a922835-a587-4dad-b3b7-bb5005ef4c99";*/
+
 export default{
         data(){
             return{
-                devices:[]
+                devices:[],
+                searchQuery: ''
             }
         },created(){
-            this.$axios.get('devices',{
+            var projectId = this.getCookie('projectId');
+            var username = this.getCookie('username');
+            var password = this.getCookie('password');
+            this.$axios.get('project/'+projectId+'/device',{
                 //设置头
                 headers:{
                     'content-type':'application/x-www-form-urlencoded'
                 },
                 auth: {
-                    username: 'admin',
-                    password: 'admin'
+                    username: username,
+                    password: password
                 }
             }).then(res=>{
                 this.devices = res.data.data
@@ -171,9 +169,9 @@ export default{
                 if (target.parentNode.parentNode.parentNode.tagName.toLowerCase() == "td") {
                     //alert("C");
                     var rowIndex = target.parentNode.parentNode.parentNode.parentNode.rowIndex;
-                    alert(rowIndex);
+                    //alert(rowIndex);
                     var id = document.getElementById("table_value").rows[rowIndex].cells[0].innerHTML;
-                    alert(id);
+                    //alert(id);
                     var qs = require('qs');
                     this.$axios.delete('devices/'+id,{
 
@@ -229,9 +227,48 @@ export default{
                 }
 
             }*/
-        }
+        },
+        computed: {  
+            devicesA: function () {  
+                var self = this;  
+                return self.devices.filter(function (item) {  
+                    return item.name.toLowerCase().indexOf(self.searchQuery.toLowerCase()) !== -1;  
+                })
+
+                /*self.devices.filter(function (device) {
+                    var searchRegex = new RegExp(self.searchQuery, 'i');
+                    var arr=[];
+                    for(var i= 0, j = items.length; i < j; i++){
+                        arr[i] = {};
+                        arr[i].contacters = [];
+                        for(var item = 0, len = items[i].contacters.length; item < len; item++){
+                            if(searchRegex.test(items[i].contacters[item].name) || searchRegex.test(items[i].contacters[item].enterpriseName) || searchRegex.test(items[i].contacters[item].phoneNumber) || searchRegex.test(items[i].contacters[item].uniqueID)){
+                                arr[i].firstLetter = items[i].firstLetter;
+                                arr[i].contacters.push(items[i].contacters[item]);
+                            }
+                        }
+                    }
+                    return arr;
+                    alert(device.name);
+                    alert(device.ip);
+                    console.log(device);
+                    alert(searchRegex.test(device.name) );
+                    return device.isActive && (
+                        searchRegex.test(device.name) ||
+                        searchRegex.test(device.ip)
+                    )
+                }) */
+
+            } 
+        } 
     }
 </script>
 <style>
+.ulactions{
+    margin: 5px 0 0 0;
+}
 
+.ulactions li{
+    display: inline;
+}
 </style>
